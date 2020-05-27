@@ -40,7 +40,8 @@ require(['mathjax'], function(MathJax) {
                 bmat : ["\\begin{bmatrix}#1\\end{bmatrix}", 1],
                 ceil : ["\\left\\lceil #1\\right\\rceil", 1],
                 floor : ["\\left\\lfloor #1\\right\\rfloor", 1],
-                space : ["\\mathcal{#1}", 1]
+                space : ["\\mathcal{#1}", 1],
+                abs : ["\\left|#1\\right|", 1]
             }
         }
     });
