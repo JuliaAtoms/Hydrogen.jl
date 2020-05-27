@@ -1,14 +1,16 @@
 using Hydrogen
 using Documenter
 
+DocMeta.setdocmeta!(Hydrogen, :DocTestSetup, :(using Hydrogen, AtomicLevels);
+                    recursive=true)
 makedocs(;
     modules=[Hydrogen],
     authors="Stefanos Carlström <stefanos.carlstrom@gmail.com> and contributors",
-    repo="https://github.com/jagot/Hydrogen.jl/blob/{commit}{path}#L{line}",
+    repo="https://github.com/JuliaAtoms/Hydrogen.jl/blob/{commit}{path}#L{line}",
     sitename="Hydrogen.jl",
     format=Documenter.HTML(;
                            prettyurls=get(ENV, "CI", "false") == "true",
-                           canonical="https://jagot.github.io/Hydrogen.jl",
+                           canonical="https://juliatatoms.github.io/Hydrogen.jl",
                            assets=String["assets/latex.js"],
                            mathengine = Documenter.MathJax()
     ),
@@ -18,5 +20,5 @@ makedocs(;
 )
 
 deploydocs(;
-    repo="github.com/jagot/Hydrogen.jl",
+    repo="github.com/JuliaAtoms/Hydrogen.jl",
 )
