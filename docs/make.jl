@@ -1,7 +1,7 @@
 using Hydrogen
 using Documenter
 
-DocMeta.setdocmeta!(Hydrogen, :DocTestSetup, :(using Hydrogen, AtomicLevels);
+DocMeta.setdocmeta!(Hydrogen, :DocTestSetup, :(using Hydrogen, AtomicLevels, HalfIntegers);
                     recursive=true)
 makedocs(;
     modules=[Hydrogen],
