@@ -3,7 +3,6 @@ language: julia
 notifications:
   email: false
 julia:
-  - 1.0
   - 1.4
   - nightly
 os:
@@ -18,10 +17,13 @@ jobs:
     - julia: nightly
   include:
     - stage: Documentation
-      julia: 1.0
+      julia: 1.4
       script: |
         julia --project=docs -e '
           using Pkg
+          pkg"add http://github.com/JuliaAtoms/AtomicLevels.jl"
+          pkg"add http://github.com/JuliaAtoms/EnergyExpressions.jl"
+          pkg"add http://github.com/JuliaAtoms/AngularMomentumAlgebra.jl#revamp"
           Pkg.develop(PackageSpec(path=pwd()))
           Pkg.instantiate()
           include("docs/make.jl")'
