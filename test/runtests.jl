@@ -52,4 +52,16 @@ end
             end
         end
     end
+
+    @testset "Orbitals" begin
+        # Error conditions:
+        @test_throws ArgumentError non_relativistic_orbital(0, 0)
+        @test_throws ArgumentError non_relativistic_orbital(-1, 0)
+        @test_throws ArgumentError non_relativistic_orbital(1, 1)
+        @test_throws ArgumentError non_relativistic_orbital(2, -1)
+        @test_throws MethodError non_relativistic_orbital(2.5, -1)
+        # Check values:
+        P10 = non_relativistic_orbital(1, 0)
+        @test P10(0) ≈ 0.0
+    end
 end
