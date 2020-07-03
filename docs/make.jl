@@ -1,5 +1,6 @@
-using Hydrogen
 using Documenter
+using Hydrogen
+using HalfIntegers, Plots, AtomicLevels
 
 DocMeta.setdocmeta!(Hydrogen, :DocTestSetup, :(using Hydrogen, AtomicLevels, HalfIntegers);
                     recursive=true)
@@ -16,6 +17,7 @@ makedocs(;
     ),
     pages=[
         "Home" => "index.md",
+        "Orbitals" => "orbitals.md",
     ],
 )
 
