@@ -1,6 +1,7 @@
 using Documenter
 using Hydrogen
-using HalfIntegers, Plots, AtomicLevels
+using HalfIntegers, AtomicLevels
+using Plots; pyplot()
 
 DocMeta.setdocmeta!(Hydrogen, :DocTestSetup, :(using Hydrogen, AtomicLevels, HalfIntegers);
                     recursive=true)
