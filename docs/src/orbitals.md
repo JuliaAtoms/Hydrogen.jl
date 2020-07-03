@@ -1,6 +1,6 @@
 # Orbitals
 
-[`non_relativistic_orbital`](@ref) is can be used to calculate the non-relativstisc reduced
+[`non_relativistic_orbital`](@ref) is can be used to calculate the non-relativistic reduced
 radial orbitals:
 
 ```@example
