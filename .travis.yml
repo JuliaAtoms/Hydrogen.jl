@@ -6,10 +6,6 @@ notifications:
 julia:
   - 1.4
   - nightly
-addons:
-  apt:
-    packages:
-      - python3-matplotlib
 os:
   - linux
   - osx
@@ -23,6 +19,7 @@ jobs:
   include:
     - stage: Documentation
       julia: 1.4
+      env: PYTHON=
       script: |
         julia --project=docs -e '
           using Pkg
