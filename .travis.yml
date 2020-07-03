@@ -9,6 +9,10 @@ addons:
   apt:
     packages:
       - python3-matplotlib
+os:
+  - linux
+  - osx
+  - windows
 arch:
   - x64
 jobs:
@@ -16,10 +20,6 @@ jobs:
   allow_failures:
     - julia: nightly
   include:
-    - os: linux
-      dist: bionic
-    - os: windows
-    - os: osx
     - stage: Documentation
       julia: 1.4
       script: |
