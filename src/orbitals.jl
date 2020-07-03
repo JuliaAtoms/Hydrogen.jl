@@ -29,10 +29,10 @@ function non_relativistic_orbital(n::Integer, ℓ::Integer, Z = 1)
     n > 0 || throw(ArgumentError("Invalid n = $n, must be n ≥ 1"))
     0 ≤ ℓ < n || throw(ArgumentError("Invalid ℓ = $ℓ for n = $n, must be 0 ≤ ℓ < n"))
     # Normalization factor.
-    # Note: n! = Γ(n + 1), so (n - ℓ - 1)!/(2n(n+ℓ)) = Γ(n + 1)/(2nΓ(n+ℓ+1))
+    # Note: n! = Γ(n+1), so (n-ℓ-1)!/(2n(n+ℓ)!) = Γ(n+1)/(2nΓ(n+ℓ+1))
     N = sqrt((2Z/n)^3*gamma(n-ℓ)/(2n*gamma(n+ℓ+1)))
-    # Generalized Laguerre polynomial L^{(2ℓ+1)}_{n - ℓ - 1}(q), where q = 2Zr/n:
-    L = convert(Polynomial, Laguerre{2ℓ+1}([zeros(n - ℓ - 1); 1], :q))
+    # Generalized Laguerre polynomial L^{(2ℓ+1)}_{n-ℓ-1}(q), where q = 2Zr/n:
+    L = convert(Polynomial, Laguerre{2ℓ+1}([zeros(n-ℓ-1); 1], :q))
     # Single Polynomial object for the polynomial part, multiplied by r to get the
     # reduced polynomial:
     C = let r = Polynomial([0, 1], :r)
