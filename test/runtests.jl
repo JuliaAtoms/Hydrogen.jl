@@ -31,14 +31,6 @@ function lyman_balmer²(o, n, ℓ)
 end
 
 @testset "Hydrogen.jl" begin
-    @testset "Factorial ratios" begin
-        for a = 1:6
-            for b = 1:6
-                @test Hydrogen.factorial_ratio(a,b) == factorial(a)/factorial(b)
-            end
-        end
-    end
-
     @testset "Radial dipole moments" begin
         # We cannot compare with Table 13 of Bethe and Salpeter 1977,
         # since it provides so few figures and some of the values

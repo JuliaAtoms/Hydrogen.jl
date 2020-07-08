@@ -2,6 +2,7 @@ module Hydrogen
 
 using LinearAlgebra
 using SparseArrays
+using Combinatorics
 
 using AtomicLevels
 using AngularMomentumAlgebra
@@ -13,7 +14,6 @@ using SpecialPolynomials: Laguerre
 using SpecialFunctions: gamma
 
 include("sparse_builder.jl")
-include("factorial_ratio.jl")
 
 include("constants.jl")
 include("energies.jl")

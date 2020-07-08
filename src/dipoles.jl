@@ -50,7 +50,7 @@ function radial_dipole_moment(a::Orbital, b::Orbital)
     n == n′ && return 3/2*n*√(n^2-ℓ^2)
 
     A = powneg1(n′-ℓ)/(4*factorial(2ℓ-1))
-    B = √(factorial_ratio(n+ℓ,n-ℓ-1)*factorial_ratio(n′+ℓ-1,n′-ℓ))
+    B = √(factorial(n+ℓ,n-ℓ-1)*factorial(n′+ℓ-1,n′-ℓ))
     C = (4*n*n′)^(ℓ+1)*(n-n′)^(n+n′-2ℓ-2)/((n+n′)^(n+n′))
 
     nᵣ = n-ℓ-1
