@@ -15,7 +15,7 @@ SpecialFunctions = "276daf66-3868-5448-9aa4-cd146d93841b"
 SpecialPolynomials = "a25cea48-d430-424a-8ee7-0d3ad3742e9e"
 
 [compat]
-HypergeometricFunctions = "0.2"
+HypergeometricFunctions = "0.2, 0.3"
 Polynomials = "1"
 SpecialFunctions = "0.10"
 SpecialPolynomials = "0.1"
