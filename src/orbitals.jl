@@ -43,4 +43,39 @@ function non_relativistic_orbital(n::Integer, ℓ::Integer, Z = 1)
     r -> C(r) * exp(q*r)
 end
 
-export non_relativistic_orbital
+"""
+    radial_moment(k, n, ℓ[, Z = 1])
+
+Compute the radial moment ``⟨rᵏ⟩`` for a hydrogenic orbital ``(n,ℓ)``
+in a Coulomb potential of charge ``Z``. The formulas are taken from Table 2⁵ of
+
+- Condon, E. U., & Shortley, G. H. (1951). The theory of atomic
+  spectra. Cambridge: Cambridge University Press.
+
+and are available for ``k ∈ -4:4``.
+"""
+function radial_moment(k::Integer, n::Integer, ℓ::Integer, Z = 1)
+    if k == 1
+        (3n^2 - ℓ*(ℓ+1))/2Z
+    elseif k == 2
+        n^2*(5n^2 + 1 - 3ℓ*(ℓ+1))/2Z^2
+    elseif k == 3
+        n^2*(35n^2*(n^2-1) - 30n^2*(ℓ+2)*(ℓ-1) + 3*(ℓ+2)*(ℓ+1)*ℓ*(ℓ-1))/8Z^3
+    elseif k == 4
+        n^4*(63n^4 - 35n^2*(2ℓ^2+2ℓ-3) + 5ℓ*(ℓ+1)*(3ℓ^2+3ℓ-10) + 12)/8Z^4
+    elseif k == -1
+        Z/n^2
+    elseif k == -2
+        Z^2/(n^3*(ℓ+1//2))
+    elseif k == -3
+        Z^3/(n^3*(ℓ+1)*(ℓ+1//2)*ℓ)
+    elseif k == -4
+        Z^4/2*(3n^2 - ℓ*(ℓ+1))/(n^5*(ℓ+3//2)*(ℓ+1)*(ℓ+1//2)*ℓ*(ℓ-1//2))
+    elseif k == 0
+        one(Z)
+    else
+        throw(ArgumentError("Radial moment not available for k = $(k)"))
+    end
+end
+
+export non_relativistic_orbital, radial_moment
