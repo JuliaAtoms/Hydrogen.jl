@@ -17,7 +17,7 @@ SpecialPolynomials = "a25cea48-d430-424a-8ee7-0d3ad3742e9e"
 [compat]
 HypergeometricFunctions = "0.2, 0.3"
 Polynomials = "1"
-SpecialFunctions = "0.10"
+SpecialFunctions = "0.10, 1"
 SpecialPolynomials = "0.1"
 julia = "1.2"
 
