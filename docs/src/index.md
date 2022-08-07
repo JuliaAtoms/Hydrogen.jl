@@ -18,4 +18,3 @@ All angular integrals are computed using
 ```@autodocs
 Modules = [Hydrogen]
 ```
-ff
