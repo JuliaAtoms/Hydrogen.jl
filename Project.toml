@@ -21,7 +21,7 @@ EnergyExpressions = "0.1"
 HypergeometricFunctions = "0.2, 0.3"
 Polynomials = "1"
 SpecialFunctions = "0.10"
-SpecialPolynomials = "0.1"
+SpecialPolynomials = "0.1, 0.4"
 julia = "1.6"
 
 [extras]
