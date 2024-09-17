@@ -15,7 +15,7 @@ SpecialFunctions = "276daf66-3868-5448-9aa4-cd146d93841b"
 SpecialPolynomials = "a25cea48-d430-424a-8ee7-0d3ad3742e9e"
 
 [compat]
-AngularMomentumAlgebra = "0.1, 0.2"
+AngularMomentumAlgebra = "0.1, 0.2, 0.3"
 AtomicLevels = "0.1"
 EnergyExpressions = "0.1"
 HypergeometricFunctions = "0.2, 0.3"
