@@ -3,16 +3,28 @@
 [`non_relativistic_orbital`](@ref) is can be used to calculate the non-relativistic reduced
 radial orbitals:
 
-```@example
-using Hydrogen, Plots; pyplot()
-function plot_nros(n; rmax=70)
-    rs = range(0, rmax; length=500)
-    p = plot(legend=false, xaxis="r (a.u.)", yaxis="\$P_{n\\ell}(r)\$  for  \$n=$n\$")
+```@setup
+using Hydrogen, CairoMakie, LaTeXStrings
+function plot_nros!(ax, n; rmax=70)
+    rs = range(0, sqrt(rmax); length=500).^2
+
     for ℓ in 0:n-1
         P = non_relativistic_orbital(n, ℓ)
-        plot!(rs, P.(rs))
+        lines!(rs, P.(rs))
     end
-    return p
 end
-plot([plot_nros(n) for n=1:4]..., layout=(4,1), size=(800, 1200))
+fig = Figure(size=(800,1200))
+for n = 1:4
+    last_plot = n == 4
+    ax = Axis(fig[n,1],
+              xlabel=last_plot ? L"$r$ [Bohr]" : "",
+              xscale=sqrt,
+              xticksvisible=last_plot, xticklabelsvisible=last_plot,
+              ylabel=L"$P_{n\ell}(r)$ [Bohr$^{-1/2}$]",
+              title=L"n=%$(n)")
+    plot_nros!(ax, n)
+end
+save("radial-orbitals.svg", fig)
 ```
+
+![](radial-orbitals.svg)

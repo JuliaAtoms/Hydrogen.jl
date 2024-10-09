@@ -1,7 +1,8 @@
 using Documenter
 using Hydrogen
 using HalfIntegers, AtomicLevels
-using Plots; pyplot()
+using CairoMakie
+using LaTeXStrings
 
 makedocs(;
     modules=[Hydrogen],
@@ -46,7 +47,6 @@ makedocs(;
             ),
         ))),
     ),
-    strict = true,
     doctest = false
 )
 
