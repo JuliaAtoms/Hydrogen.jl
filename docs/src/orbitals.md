@@ -1,7 +1,14 @@
 # Orbitals
 
+```@docs
+Hydrogen.non_relativistic_orbital
+```
+
+Continuum orbitals for hydrogenic systems can be computed using
+[CoulombFunctions.jl](https://github.com/jagot/CoulombFunctions.jl).
+
 [`non_relativistic_orbital`](@ref) is can be used to calculate the non-relativistic reduced
-radial orbitals:
+radial orbitals for bound states:
 
 ```@setup
 using Hydrogen, CairoMakie, LaTeXStrings

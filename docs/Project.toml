@@ -2,6 +2,7 @@
 AtomicLevels = "10933b4c-d60f-11e8-1fc6-bd9035a249a1"
 CairoMakie = "13f3f980-e62b-5c42-98c6-ff1f3baf88f0"
 Documenter = "e30172f5-a6a5-5a46-863b-614d45cd2de4"
+DocumenterCitations = "daee34ce-89f3-4625-b898-19384cb65244"
 HalfIntegers = "f0d1745a-41c9-11e9-1dd9-e5d34d218721"
 LaTeXStrings = "b964fa9f-0449-5b57-a5c2-d3ea65f4040f"
 

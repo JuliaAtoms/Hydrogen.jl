@@ -1,15 +1,21 @@
 using Documenter
+using DocumenterCitations
 using Hydrogen
 using HalfIntegers, AtomicLevels
 using CairoMakie
 using LaTeXStrings
+
+bib = CitationBibliography(joinpath(@__DIR__, "src", "bibliography.bib"))
 
 makedocs(;
     modules=[Hydrogen],
     sitename="Hydrogen.jl",
     pages=[
         "Home" => "index.md",
+        "Energies" => "energies.md",
         "Orbitals" => "orbitals.md",
+        "Dipoles" => "dipoles.md",
+        "References" => "references.md",
     ],
     format = Documenter.HTML(
         mathengine = MathJax2(Dict(:TeX => Dict(
@@ -47,6 +53,7 @@ makedocs(;
             ),
         ))),
     ),
+    plugins=[bib],
     doctest = false
 )
 
