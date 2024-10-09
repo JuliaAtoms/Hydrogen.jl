@@ -60,8 +60,7 @@ jobs:
           julia --project=docs -e '
             using Pkg
             Pkg.develop(PackageSpec(path=pwd()))
-            Pkg.instantiate()
-            pkg"build PyPlot"'
+            Pkg.instantiate()'
         env:
           PYTHON: ""
       - run: julia --project=docs docs/make.jl
