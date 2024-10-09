@@ -1,6 +1,31 @@
 using Hydrogen
 using AtomicLevels
+using LinearAlgebra
+using WignerSymbols
+using PrettyTables
 using Test
+
+include("burgess.jl")
+
+function test_approx_eq(a, b; on_fail::Union{Nothing,Function}=nothing, kwargs...)
+    size(a) == size(b) || throw(DimensionMismatch("Cannot compare objects of sizes $(size(a)) and $(size(b))"))
+    if !isapprox(a, b; kwargs...)
+        @error "Approximate equality failed:"
+        na = norm(a)
+        nb = norm(b)
+        Δ = norm(a-b)
+        relΔ = Δ/max(na,nb)
+        pretty_table(["|a|" na
+                      "|b|" nb
+                      "Abs. Δ" Δ
+                      "Rel. Δ" relΔ],
+                     show_header=false,
+                     alignment=[:r,:l],tf=tf_borderless)
+        isnothing(on_fail) || on_fail()
+    end
+
+    @test isapprox(a, b; kwargs...)
+end
 
 # The Lyman and Balmer series radial dipole moments are given by
 # Eq. (63.4)
@@ -47,8 +72,28 @@ end
 
         for (j,(o,ℓ′)) in enumerate([(o"1s",1), (o"2s",1), (o"2p",0), (o"2p",2)])
             for n′ = 1+ℓ′:8
-                @test radial_dipole_moment(o, Orbital(n′, ℓ′))^2 ≈
-                    lyman_balmer²(o, n′, ℓ′)
+                test_approx_eq(radial_dipole_moment(o, Orbital(n′, ℓ′))^2,
+                               lyman_balmer²(o, n′, ℓ′))
+            end
+        end
+    end
+
+    @testset "Photoionization dipole radial integrals" begin
+        for n = 1:4
+            channels = [Orbital(n, ℓ) => Orbital(:k, ℓ′)
+                        for ℓ ∈ 0:n-1 for ℓ′ ∈ (ℓ == 0 ? (1,) : (ℓ-1,ℓ+1))]
+            ref = [Burgess[ch] for ch in channels]
+            local κ = ref[1].k
+            g = Hydrogen.burgess_g(n, κ)
+            # We test each number separately, since their magnitudes are quite
+            # different.
+            for (i,ref) in enumerate(ref)
+                for (j,κ) in enumerate(κ)
+                    test_approx_eq(g[i,j], ref.absg[j], rtol=3e-5,
+                                   on_fail=() -> begin
+                                       @info "Channel $(channels[i])" κ j
+                                   end)
+                end
             end
         end
     end
