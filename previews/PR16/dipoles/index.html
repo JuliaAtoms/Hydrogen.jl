@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><title>Dipoles · Hydrogen.jl</title><meta name="title" content="Dipoles · Hydrogen.jl"/><meta property="og:title" content="Dipoles · Hydrogen.jl"/><meta property="twitter:title" content="Dipoles · Hydrogen.jl"/><meta name="description" content="Documentation for Hydrogen.jl."/><meta property="og:description" content="Documentation for Hydrogen.jl."/><meta property="twitter:description" content="Documentation for Hydrogen.jl."/><script data-outdated-warner src="../assets/warner.js"></script><link href="https://cdnjs.cloudflare.com/ajax/libs/lato-font/3.0.0/css/lato-font.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/juliamono/0.050/juliamono.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/fontawesome.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/solid.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/brands.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.8/katex.min.css" rel="stylesheet" type="text/css"/><script>documenterBaseURL=".."</script><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" data-main="../assets/documenter.js"></script><script src="../search_index.js"></script><script src="../siteinfo.js"></script><script src="../../versions.js"></script><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../assets/themes/catppuccin-mocha.css" data-theme-name="catppuccin-mocha"/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../assets/themes/catppuccin-macchiato.css" data-theme-name="catppuccin-macchiato"/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../assets/themes/catppuccin-frappe.css" data-theme-name="catppuccin-frappe"/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../assets/themes/catppuccin-latte.css" data-theme-name="catppuccin-latte"/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../assets/themes/documenter-dark.css" data-theme-name="documenter-dark" data-theme-primary-dark/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../assets/themes/documenter-light.css" data-theme-name="documenter-light" data-theme-primary/><script src="../assets/themeswap.js"></script></head><body><div id="documenter"><nav class="docs-sidebar"><div class="docs-package-name"><span class="docs-autofit"><a href="../">Hydrogen.jl</a></span></div><button class="docs-search-query input is-rounded is-small is-clickable my-2 mx-auto py-1 px-2" id="documenter-search-query">Search docs (Ctrl + /)</button><ul class="docs-menu"><li><a class="tocitem" href="../">Home</a></li><li><a class="tocitem" href="../energies/">Energies</a></li><li><a class="tocitem" href="../orbitals/">Orbitals</a></li><li class="is-active"><a class="tocitem" href>Dipoles</a><ul class="internal"><li><a class="tocitem" href="#Photoionization-dipole-matrix-elements"><span>Photoionization dipole matrix elements</span></a></li></ul></li><li><a class="tocitem" href="../references/">References</a></li></ul><div class="docs-version-selector field has-addons"><div class="control"><span class="docs-label button is-static is-size-7">Version</span></div><div class="docs-selector control is-expanded"><div class="select is-fullwidth is-size-7"><select id="documenter-version-selector"></select></div></div></div></nav><div class="docs-main"><header class="docs-navbar"><a class="docs-sidebar-button docs-navbar-link fa-solid fa-bars is-hidden-desktop" id="documenter-sidebar-button" href="#"></a><nav class="breadcrumb"><ul class="is-hidden-mobile"><li class="is-active"><a href>Dipoles</a></li></ul><ul class="is-hidden-tablet"><li class="is-active"><a href>Dipoles</a></li></ul></nav><div class="docs-right"><a class="docs-navbar-link" href="https://github.com/JuliaAtoms/Hydrogen.jl" title="View the repository on GitHub"><span class="docs-icon fa-brands"></span><span class="docs-label is-hidden-touch">GitHub</span></a><a class="docs-navbar-link" href="https://github.com/JuliaAtoms/Hydrogen.jl/blob/master/docs/src/dipoles.md" title="Edit source on GitHub"><span class="docs-icon fa-solid"></span></a><a class="docs-settings-button docs-navbar-link fa-solid fa-gear" id="documenter-settings-button" href="#" title="Settings"></a><a class="docs-article-toggle-button fa-solid fa-chevron-up" id="documenter-article-toggle-button" href="javascript:;" title="Collapse all docstrings"></a></div></header><article class="content" id="documenter-page"><h1 id="Dipoles"><a class="docs-heading-anchor" href="#Dipoles">Dipoles</a><a id="Dipoles-1"></a><a class="docs-heading-anchor-permalink" href="#Dipoles" title="Permalink"></a></h1><article class="docstring"><header><a class="docstring-article-toggle-button fa-solid fa-chevron-down" href="javascript:;" title="Collapse docstring"></a><a class="docstring-binding" id="Hydrogen.dipole_moment" href="#Hydrogen.dipole_moment"><code>Hydrogen.dipole_moment</code></a> — <span class="docstring-category">Function</span><span class="is-flex-grow-1 docstring-article-toggle-button" title="Collapse docstring"></span></header><section><div><pre><code class="language-julia hljs">dipole_moment(a, b[, component=:z])</code></pre><p>Compute the dipole moment between orbitals <code>a</code> and <code>b</code> along the Cartesian direction indicated by <code>component</code>. The radial integral is computed using <a href="#Hydrogen.radial_dipole_moment"><code>radial_dipole_moment</code></a> and the angular integral using <a href="https://github.com/JuliaAtoms/AngularMomentumAlgebra.jl">AngularMomentumAlgebra.jl</a>.</p><pre><code class="language-julia-repl hljs">julia&gt; a,b,c,d = SpinOrbital(o&quot;1s&quot;, 0, half(1)), SpinOrbital(o&quot;2s&quot;, 0, half(1)), SpinOrbital(o&quot;2p&quot;, 0, half(1)), SpinOrbital(o&quot;2p&quot;, 1, half(1))
+(1s₀α, 2s₀α, 2p₀α, 2p₁α)
+
+julia&gt; dipole_moment(a, c)
+0.7449355390278029
+
+julia&gt; dipole_moment(b, c)
+2.999999999999999
+
+julia&gt; dipole_moment(a, d)
+0.0
+
+julia&gt; dipole_moment(a, d, :x)
+-0.5267489711934153</code></pre></div><a class="docs-sourcelink" target="_blank" href="https://github.com/JuliaAtoms/Hydrogen.jl/blob/9b7768de46758a986db218ca5609ab2fab0b2237/src/dipoles.jl#L67-L93">source</a></section></article><article class="docstring"><header><a class="docstring-article-toggle-button fa-solid fa-chevron-down" href="javascript:;" title="Collapse docstring"></a><a class="docstring-binding" id="Hydrogen.radial_dipole_moment" href="#Hydrogen.radial_dipole_moment"><code>Hydrogen.radial_dipole_moment</code></a> — <span class="docstring-category">Function</span><span class="is-flex-grow-1 docstring-article-toggle-button" title="Collapse docstring"></span></header><section><div><pre><code class="language-julia hljs">radial_dipole_moment(a, b)</code></pre><p>Compute the radial dipole moment between the orbitals <code>a</code> and <code>b</code> according to</p><p class="math-container">\[\begin{align}
+\tag{BS63.2}
+R_{n \ell}^{n&#39;,\ell-1} &amp;=
+ABCD,
+&amp;
+n \neq n&#39;\\
+\tag{BS63.5}
+R_{n,\ell-1}^{n\ell} &amp;=
+R_{n\ell}^{n,\ell-1} =
+\frac{3}{2}
+n\sqrt{n^2-\ell^2},
+&amp; n = n&#39;,
+\end{align}\]</p><p>where</p><p class="math-container">\[\begin{aligned}
+A &amp;= \frac{(-)^{n&#39;-\ell}}{4(2\ell-1)!}, \\
+B &amp;= \sqrt{\frac{(n+\ell)!(n&#39;+\ell-1)!}{(n-\ell-1)!(n&#39;-\ell)!}}, \\
+C &amp;= \frac{(4nn&#39;)^{\ell+1}(n-n&#39;)^{n+n&#39;-2\ell-2}}{(n+n&#39;)^{n+n&#39;}}, \\
+D &amp;= {_2}F_1(-n_r, -n_r&#39;, 2\ell, x) -
+\left(\frac{n-n&#39;}{n+n&#39;}\right)^2
+{_2}F_1(-n_r-2, -n_r&#39;, 2\ell, x), \\
+n_r &amp;= n-\ell-1, \quad
+n_r&#39; = n&#39; - \ell, \quad
+x = -\frac{4nn&#39;}{(n-n&#39;)^2},
+\end{aligned}\]</p><p>and <span>${_2}F_1(a,b,c;x)$</span> is a hypergeometric function that can be computed used <a href="https://github.com/JuliaMath/HypergeometricFunctions.jl">HyperGeometricFunctions.jl</a>.</p></div><a class="docs-sourcelink" target="_blank" href="https://github.com/JuliaAtoms/Hydrogen.jl/blob/9b7768de46758a986db218ca5609ab2fab0b2237/src/dipoles.jl#L1-L39">source</a></section></article><article class="docstring"><header><a class="docstring-article-toggle-button fa-solid fa-chevron-down" href="javascript:;" title="Collapse docstring"></a><a class="docstring-binding" id="Hydrogen.dipole_matrix" href="#Hydrogen.dipole_matrix"><code>Hydrogen.dipole_matrix</code></a> — <span class="docstring-category">Function</span><span class="is-flex-grow-1 docstring-article-toggle-button" title="Collapse docstring"></span></header><section><div><pre><code class="language-julia hljs">dipole_matrix(orbitals[, component=:z])</code></pre><p>Return the sparse matrix whose elements correspond to the dipole moments between all of the <code>orbitals</code> as measured along the Cartesian direction indicated by <code>component</code>.</p><p><strong>Examples</strong></p><pre><code class="language-julia-repl hljs">julia&gt; dipole_matrix(sos&quot;1[s] 2[s-p]&quot;)
+10×10 SparseArrays.SparseMatrixCSC{Float64,Int64} with 8 stored entries:
+  [7, 1]  =  0.744936
+  [8, 2]  =  0.744936
+  [7, 3]  =  3.0
+  [8, 4]  =  3.0
+  [1, 7]  =  0.744936
+  [3, 7]  =  3.0
+  [2, 8]  =  0.744936
+  [4, 8]  =  3.0
+
+julia&gt; dipole_matrix(sos&quot;1[s] 2[s-p]&quot;, :y)
+10×10 SparseArrays.SparseMatrixCSC{Complex{Float64},Int64} with 16 stored entries:
+  [5 ,  1]  =  0.0+0.526749im
+  [9 ,  1]  =  0.0+0.526749im
+  [6 ,  2]  =  0.0+0.526749im
+  [10,  2]  =  0.0+0.526749im
+  [5 ,  3]  =  0.0+2.12132im
+  [9 ,  3]  =  0.0+2.12132im
+  [6 ,  4]  =  0.0+2.12132im
+  [10,  4]  =  0.0+2.12132im
+  [1 ,  5]  =  -0.0-0.526749im
+  [3 ,  5]  =  -0.0-2.12132im
+  [2 ,  6]  =  -0.0-0.526749im
+  [4 ,  6]  =  -0.0-2.12132im
+  [1 ,  9]  =  -0.0-0.526749im
+  [3 ,  9]  =  -0.0-2.12132im
+  [2 , 10]  =  -0.0-0.526749im
+  [4 , 10]  =  -0.0-2.12132im</code></pre></div><a class="docs-sourcelink" target="_blank" href="https://github.com/JuliaAtoms/Hydrogen.jl/blob/9b7768de46758a986db218ca5609ab2fab0b2237/src/dipoles.jl#L102-L142">source</a></section></article><h2 id="Photoionization-dipole-matrix-elements"><a class="docs-heading-anchor" href="#Photoionization-dipole-matrix-elements">Photoionization dipole matrix elements</a><a id="Photoionization-dipole-matrix-elements-1"></a><a class="docs-heading-anchor-permalink" href="#Photoionization-dipole-matrix-elements" title="Permalink"></a></h2><p>We implement the recurrence relations for computing the radial dipole integrals between a bound orbital and a continuum orbital, as detailed by <a href="../references/#Burgess1965">Burgess [2]</a>. NB that his derivation is in <em>Rydberg atomic units</em>, whereas we are typically interested in obtaining results in <em>Hartree atomic units</em>. To reduce the possibilities for errors, the implementation is in Rydberg atomic units, following the notation of <a href="../references/#Burgess1965">Burgess [2]</a>, and an interface routine is provided that performs unit conversions.</p><article class="docstring"><header><a class="docstring-article-toggle-button fa-solid fa-chevron-down" href="javascript:;" title="Collapse docstring"></a><a class="docstring-binding" id="Hydrogen.burgess_g" href="#Hydrogen.burgess_g"><code>Hydrogen.burgess_g</code></a> — <span class="docstring-category">Function</span><span class="is-flex-grow-1 docstring-article-toggle-button" title="Collapse docstring"></span></header><section><div><pre><code class="language-julia hljs">burgess_g(n, κ)</code></pre><p>Compute the integrals</p><p class="math-container">\[\begin{equation}
+\tag{Burgess22}
+g(n, \ell, \kappa, \ell&#39;) =
+\frac{1}{n^2}
+\int_0^\infty\diff{\rho}
+\mathscr{P}_{n\ell}(\rho)
+\rho
+\mathscr{F}_{\kappa\ell}(\rho)
+\end{equation}\]</p><p>as given by <a href="../references/#Burgess1965">Burgess [2]</a>, for <span>$\ell\in\{0..n-1\}$</span> and <span>$\ell&#39;=\ell\pm1$</span>.</p></div><a class="docs-sourcelink" target="_blank" href="https://github.com/JuliaAtoms/Hydrogen.jl/blob/9b7768de46758a986db218ca5609ab2fab0b2237/src/photoionization_dipoles.jl#L95-L112">source</a></section></article></article><nav class="docs-footer"><a class="docs-footer-prevpage" href="../orbitals/">« Orbitals</a><a class="docs-footer-nextpage" href="../references/">References »</a><div class="flexbox-break"></div><p class="footer-message">Powered by <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> and the <a href="https://julialang.org/">Julia Programming Language</a>.</p></nav></div><div class="modal" id="documenter-settings"><div class="modal-background"></div><div class="modal-card"><header class="modal-card-head"><p class="modal-card-title">Settings</p><button class="delete"></button></header><section class="modal-card-body"><p><label class="label">Theme</label><div class="select"><select id="documenter-themepicker"><option value="auto">Automatic (OS)</option><option value="documenter-light">documenter-light</option><option value="documenter-dark">documenter-dark</option><option value="catppuccin-latte">catppuccin-latte</option><option value="catppuccin-frappe">catppuccin-frappe</option><option value="catppuccin-macchiato">catppuccin-macchiato</option><option value="catppuccin-mocha">catppuccin-mocha</option></select></div></p><hr/><p>This document was generated with <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> version 1.7.0 on <span class="colophon-date" title="Wednesday 9 October 2024 20:09">Wednesday 9 October 2024</span>. Using Julia version 1.11.0.</p></section><footer class="modal-card-foot"></footer></div></div></div></body></html>
