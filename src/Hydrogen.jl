@@ -18,6 +18,7 @@ include("factorial_ratio.jl")
 include("constants.jl")
 include("energies.jl")
 include("dipoles.jl")
+include("photoionization_dipoles.jl")
 include("orbitals.jl")
 
 end
