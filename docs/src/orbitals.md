@@ -27,7 +27,6 @@ for n = 1:4
     last_plot = n == 4
     ax = Axis(fig[n,1],
               xlabel=last_plot ? L"$r$ [Bohr]" : "",
-              xscale=sqrt,
               xticksvisible=last_plot, xticklabelsvisible=last_plot,
               ylabel=L"$P_{n\ell}(r)$ [Bohr$^{-1/2}$]",
               title=L"n=%$(n)")
