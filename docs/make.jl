@@ -31,6 +31,7 @@ makedocs(;
                 :mat => ["\\mathsf{#1}",1],
                 :conj => ["#1^*",1],
                 :im => "\\mathrm{i}",
+                :ce => "\\mathrm{e}",
                 :operator => ["\\mathfrak{#1}",1],
                 :Hamiltonian => "\\operator{H}",
                 :hamiltonian => "\\operator{h}",

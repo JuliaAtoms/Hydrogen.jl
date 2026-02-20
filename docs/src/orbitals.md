@@ -2,6 +2,8 @@
 
 ```@docs
 Hydrogen.non_relativistic_orbital
+Hydrogen.Burgess𝓟
+Hydrogen.Burgess𝓕
 ```
 
 Continuum orbitals for hydrogenic systems can be computed using

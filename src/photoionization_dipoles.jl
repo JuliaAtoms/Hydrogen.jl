@@ -64,7 +64,7 @@ function recur!(g::BurgessG{T}, κ) where T
     end
 
     n == 2 && return
-    
+
     for ℓ = n-1:-1:2
         ℓ² = T(ℓ^2)
         c₁ = n² - ℓ²
@@ -104,7 +104,7 @@ g(n, \ell, \kappa, \ell') =
 \int_0^\infty\diff{\rho}
 \mathscr{P}_{n\ell}(\rho)
 \rho
-\mathscr{F}_{\kappa\ell}(\rho)
+\mathscr{F}_{\kappa\ell'}(\rho)
 \end{equation}
 ```
 as given by [Burgess1965](@citet), for ``\ell\in\{0..n-1\}`` and
@@ -136,4 +136,89 @@ function burgess_g(n::Integer, κ::Union{Real,AbstractVector{<:Real}})
     recur!(g, κ′)
 
     g.g[:,2:end]
+end
+
+@doc raw"""
+    Burgess𝓟(n, ℓ, ρ)
+
+Compute the bound hydrogenic radial orbital according
+[Burgess1965](@citet):
+```math
+\begin{equation}
+\tag{Burgess23}
+\begin{aligned}
+\mathscr{P}_{n\ell}(\rho)
+&=
+\sqrt{\frac{(n+\ell)!}{(n-\ell-1)!}}
+\left(\frac{2\rho}{n}\right)^{\ell+1}
+\frac{\ce^{-\rho/n}}{n(\ell+1)!}\\
+&\hphantom{=}
+{_1}F_1(\ell+1-n;2\ell+2;\frac{2\rho}{n}),
+\end{aligned}
+\end{equation}
+```
+which is normalized to
+```math
+\begin{equation}
+\tag{Burgess20}
+\int_0^\infty\diff{\rho}
+\mathscr{P}_{n\ell}(\rho)
+\mathscr{P}_{n'\ell'}(\rho) =
+\delta_{nn'}.
+\end{equation}
+```
+"""
+function Burgess𝓟(n, ℓ, ρ)
+    T = eltype(ρ)
+    a = √(factorial_ratio(n+ℓ, n-ℓ-1))
+    b = (2ρ/n)^(ℓ+1)
+    c = exp(-ρ/n)*(n*factorial(2ℓ+1))
+    d = _₁F₁(ℓ+1-n, 2ℓ+2, 2ρ/n)
+
+    a*b*c*d
+end
+
+@doc raw"""
+    Burgess𝓕(κ, ℓ, ρ)
+
+Compute the unbound hydrogenic radial orbital according to
+[Burgess1965](@citet):
+```math
+\begin{equation}
+\tag{Burgess24}
+\begin{aligned}
+\mathscr{F}_{\kappa\ell}(\rho)
+&=
+\sqrt{
+\frac{\pi}{2(1-\ce^{-2\pi/\kappa})}
+\prod_{s=0}^\ell
+(1 + s^2\kappa^2)
+}\\
+&\hphantom{=}
+\frac{(2\rho)^{\ell+1}}{(2\ell+1)!}
+\ce^{\im\kappa\rho}
+{_1}F_1(\ell+1-\im/\kappa;2\ell+2;-2\im\kappa\rho),
+\end{aligned}
+\end{equation}
+```
+which is normalized to
+```math
+\begin{equation}
+\tag{Burgess21}
+\int_0^\infty\diff{\rho}
+\mathscr{F}_{n\ell}(\rho)
+\mathscr{F}_{n'\ell'}(\rho) =
+\pi\delta(\kappa^2-{\kappa'}^2).
+\end{equation}
+```
+"""
+function Burgess𝓕(κ, ℓ, ρ)
+    T = promote_type(eltype(κ), eltype(ρ))
+
+    κ² = T(κ^2)
+    a = √(π*prod(s -> 1+s^2*κ², 1:ℓ, init=one(T))/(2*(1-exp(-2π/κ))))
+    b = T(2ρ)^(ℓ+1)/factorial(2ℓ+1)
+    c = exp(im*κ*ρ)
+    d = _₁F₁(ℓ+1-im/κ, 2ℓ+2, -2im*κ*ρ)
+    a*b*c*d
 end
